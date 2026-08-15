@@ -48,7 +48,7 @@ class NetworkDataExtract():
             raise NetworkSecurityException(e,sys)
         
 if __name__=='__main__':
-    FILE_PATH="Network_Data\phisingData.csv"
+    FILE_PATH="Network_Data\\phisingData.csv"
     DATABASE="gopalbhargav59_db_user"
     Collection="NetworkData"
     networkobj=NetworkDataExtract()

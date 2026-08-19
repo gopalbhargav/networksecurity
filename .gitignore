@@ -1,3 +1,12 @@
 venv
 .env
 .github
+__pycache__/
+*.pyc
+Artifacts/
+logs/
+final_model/
+mlruns/
+*.db
+.ipynb_checkpoints/
+.vscode/

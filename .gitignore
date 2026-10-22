@@ -1,12 +1,36 @@
-venv
+
+# Secrets
 .env
-.github
+.env.*
+!.env.example
+
+# Python virtual environments
+venv/
+.venv/
+env/
+
+# Python cache
 __pycache__/
-*.pyc
+*.py[cod]
+*.pyo
+
+# Generated ML artifacts
 Artifacts/
+artifacts/
 logs/
 final_model/
 mlruns/
+prediction_output/
+
+# Local databases
 *.db
+*.sqlite
+*.sqlite3
+
+# Notebooks and IDE
 .ipynb_checkpoints/
 .vscode/
+
+# OS files
+.DS_Store
+Thumbs.db

@@ -26,16 +26,38 @@ class DataValidation:
         except Exception as e:
             raise NetworkSecurityException(e,sys)
         
-    def validate_number_of_columns(self,dataframe:pd.DataFrame)->bool:
+
+    def validate_number_of_columns(self, dataframe: pd.DataFrame) -> bool:
         try:
-            number_of_columns=len(self._schema_config)
-            logging.info(f"Required number of columns:{number_of_columns}")
-            logging.info(f"Data frame has columns:{len(dataframe.columns)}")
-            if len(dataframe.columns)==number_of_columns:
-                return True
-            return False
+            schema_columns = self._schema_config.get("columns", [])
+            expected_columns = [
+                list(column_definition.keys())[0]
+                for column_definition in schema_columns
+            ]
+
+            actual_columns = list(dataframe.columns)
+
+            missing_columns = [
+                column for column in expected_columns
+                if column not in actual_columns
+            ]
+            extra_columns = [
+                column for column in actual_columns
+                if column not in expected_columns
+            ]
+
+            if missing_columns or extra_columns:
+                logging.error(
+                    f"Missing columns: {missing_columns}; "
+                    f"Unexpected columns: {extra_columns}"
+                )
+                return False
+
+            return True
+
         except Exception as e:
-            raise NetworkSecurityException(e,sys)
+            raise NetworkSecurityException(e, sys) from e
+
         
     def detect_dataset_drift(self,base_df,current_df,threshold=0.05)->bool:
         try:
